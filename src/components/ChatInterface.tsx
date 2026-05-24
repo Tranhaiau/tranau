@@ -37,8 +37,10 @@ export function ChatInterface({ file, document, onDocumentProcessed }: Props) {
         // First question: file hasn't been processed yet — RTK proxy reads + processes + sends
         result = await askAboutFile({ file, question }).unwrap();
         // After first processing, cache the document for follow-up questions
-        const { readFileAsText, processFileContent } = await import('../utils/fileProcessor');
-        const content = await readFileAsText(file);
+        const { isExcelFile, readExcelAsText, readFileAsText, processFileContent } = await import('../utils/fileProcessor');
+        const content = isExcelFile(file)
+          ? await readExcelAsText(file)
+          : await readFileAsText(file);
         const processed = processFileContent({ name: file.name, content, type: file.type, size: file.size });
         onDocumentProcessed(processed);
       } else {

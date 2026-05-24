@@ -14,7 +14,7 @@ export function FileUpload({ onFileSelect, disabled }: Props) {
   function handleFile(file: File) {
     setError(null);
     if (!isSupportedFileType(file)) {
-      setError(`Loại file "${file.type || file.name}" không được hỗ trợ. Hãy dùng .txt, .md, .csv, .json, .html`);
+      setError(`Loại file "${file.type || file.name}" không được hỗ trợ. Hãy dùng .xlsx, .xls, .txt, .md, .csv, .json, .html`);
       return;
     }
     if (file.size > 10 * 1024 * 1024) {
@@ -53,12 +53,12 @@ export function FileUpload({ onFileSelect, disabled }: Props) {
         <p className="upload-hint">
           Kéo thả file vào đây hoặc <strong>click để chọn</strong>
         </p>
-        <p className="upload-types">Hỗ trợ: .txt · .md · .csv · .json · .html · .xml</p>
+        <p className="upload-types">Hỗ trợ: .xlsx · .xls · .txt · .md · .csv · .json · .html · .xml</p>
       </div>
       <input
         ref={inputRef}
         type="file"
-        accept=".txt,.md,.csv,.json,.html,.xml,text/*,application/json"
+        accept=".xlsx,.xls,.txt,.md,.csv,.json,.html,.xml,text/*,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
         style={{ display: 'none' }}
         onChange={onInputChange}
         disabled={disabled}

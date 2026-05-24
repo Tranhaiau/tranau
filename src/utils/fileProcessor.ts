@@ -1,3 +1,5 @@
+import * as XLSX from 'xlsx';
+
 export interface RawFileContent {
   name: string;
   content: string;
@@ -20,7 +22,12 @@ export interface ProcessedDocument {
 const CHUNK_SIZE = 2000;
 const CHUNK_OVERLAP = 200;
 
-const SUPPORTED_TYPES = [
+const EXCEL_TYPES = [
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
+  'application/vnd.ms-excel', // .xls
+];
+
+const TEXT_TYPES = [
   'text/plain',
   'text/markdown',
   'text/csv',
@@ -30,9 +37,18 @@ const SUPPORTED_TYPES = [
   'text/xml',
 ];
 
+export function isExcelFile(file: File): boolean {
+  return (
+    EXCEL_TYPES.includes(file.type) ||
+    file.name.endsWith('.xlsx') ||
+    file.name.endsWith('.xls')
+  );
+}
+
 export function isSupportedFileType(file: File): boolean {
   return (
-    SUPPORTED_TYPES.includes(file.type) ||
+    isExcelFile(file) ||
+    TEXT_TYPES.includes(file.type) ||
     file.name.endsWith('.md') ||
     file.name.endsWith('.txt') ||
     file.name.endsWith('.csv') ||
@@ -46,6 +62,32 @@ export function readFileAsText(file: File): Promise<string> {
     reader.onload = (e) => resolve(e.target?.result as string);
     reader.onerror = () => reject(new Error('Không thể đọc file'));
     reader.readAsText(file, 'UTF-8');
+  });
+}
+
+export function readExcelAsText(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('Không thể đọc file Excel'));
+    reader.onload = (e) => {
+      try {
+        const data = new Uint8Array(e.target?.result as ArrayBuffer);
+        const workbook = XLSX.read(data, { type: 'array' });
+
+        const parts: string[] = [];
+        for (const sheetName of workbook.SheetNames) {
+          const sheet = workbook.Sheets[sheetName];
+          const csv = XLSX.utils.sheet_to_csv(sheet, { blankrows: false });
+          if (csv.trim()) {
+            parts.push(`=== Sheet: ${sheetName} ===\n${csv}`);
+          }
+        }
+        resolve(parts.join('\n\n'));
+      } catch {
+        reject(new Error('File Excel bị lỗi hoặc không đọc được'));
+      }
+    };
+    reader.readAsArrayBuffer(file);
   });
 }
 

@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
+  isExcelFile,
   isSupportedFileType,
   processFileContent,
+  readExcelAsText,
   readFileAsText,
   type ProcessedDocument,
 } from '../utils/fileProcessor';
@@ -43,7 +45,9 @@ export const claudeApi = createApi({
 
         let content: string;
         try {
-          content = await readFileAsText(file);
+          content = isExcelFile(file)
+            ? await readExcelAsText(file)
+            : await readFileAsText(file);
         } catch {
           return {
             error: { status: 'CUSTOM_ERROR', error: 'Không thể đọc file' },
