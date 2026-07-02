@@ -55,14 +55,27 @@ CSV export từ hệ thống PGS, các view: `Vw_DV_KeHoach2`, `Vw_DV_KTV`,
 ## Xem trên điện thoại
 
 **Đừng xem bằng khung xem trước trong ứng dụng** (bấm thẳng vào file đính
-kèm trong Zalo/Messages/Claude — Quick Look của iPhone): trình xem trước
-này chặn JavaScript nên dashboard chỉ hiện khung trống với "Đang tải...".
+kèm trong Zalo/Messages — Quick Look của iPhone): trình xem trước này
+chặn JavaScript nên dashboard chỉ hiện khung trống với "Đang tải...".
+Lưu ý thêm: **Safari trên iPhone không mở được file HTML lưu trong máy**
+(không xuất hiện trong menu Chia sẻ) — đây là hạn chế của iOS.
 
-Cách đúng: **lưu file về máy rồi mở bằng Safari hoặc Chrome**
-(iPhone: tải về → app Tệp → giữ file → Chia sẻ → Safari;
-Android: tải về → mở bằng Chrome). Giao diện đã responsive cho màn hình
-điện thoại. Ổn định nhất là đưa file lên một địa chỉ web nội bộ và mở
-bằng link.
+### iPhone — dùng app Documents by Readdle (miễn phí)
+
+1. Cài app **Documents by Readdle** từ App Store (một lần duy nhất).
+2. Nhận file `index.html` (qua Zalo/Mail/Claude...) → bấm nút **Chia sẻ**
+   → chọn **Documents** (hoặc *Lưu vào Tệp* rồi mở bằng app Documents).
+3. Trong app Documents, chạm vào file — dashboard chạy đầy đủ biểu đồ,
+   bộ lọc, kể cả khi không có mạng.
+
+### Android
+
+Tải file về → mở bằng **Chrome** (từ thanh thông báo tải xuống hoặc app
+Files). Chrome Android mở file HTML cục bộ bình thường.
+
+Giao diện đã responsive cho màn hình điện thoại (thử nghiệm ở 390px).
+Nếu sau này muốn tiện hơn nữa (mở bằng link, không cần gửi file), có thể
+đưa `dist/index.html` lên GitHub Pages hoặc server nội bộ.
 
 ## Sửa giao diện / biểu đồ
 
