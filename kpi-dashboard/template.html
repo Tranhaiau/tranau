@@ -166,6 +166,10 @@ body{font-family:'Segoe UI',sans-serif;background:#eff1f5;color:var(--text);font
 .cskh-tbl tr:hover td:not(.cskh-code):not(.metric-name){filter:brightness(.97);}
 
 /* ── Responsive mobile ── */
+@media(min-width:901px){
+  /* header ghim khi cuộn — chỉ desktop; trên mobile header cao gần hết màn hình */
+  .hdr{position:sticky;top:0;z-index:200;}
+}
 @media(max-width:900px){
   .kpi6sc{grid-template-columns:repeat(3,1fr);}
   .q-grid,.g4,.kpi8-grid,.ctrl-g,.sol-wrap{grid-template-columns:repeat(2,1fr);}
