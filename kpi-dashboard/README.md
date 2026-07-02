@@ -10,8 +10,10 @@ server.
 # 1. Copy 3 file CSV mới (đè lên file cũ) vào thư mục data/
 #    data/fact.csv  ·  data/dim_date.csv  ·  data/dim_org.csv
 
-# 2. Build
+# 2. Build (ngày "dữ liệu đến hết" mặc định = hôm nay;
+#    build lại dữ liệu cũ thì chỉ định rõ: --asof YYYY-MM-DD)
 node build.js
+node build.js --asof 2026-06-23
 
 # 3. Mở kết quả
 #    dist/index.html  ← file dashboard hoàn chỉnh, gửi ai cũng mở được
@@ -49,6 +51,18 @@ lý không có trong `dim_org.csv`.
 CSV export từ hệ thống PGS, các view: `Vw_DV_KeHoach2`, `Vw_DV_KTV`,
 `Vw_DV_VatTuSon`, `Vw_DV_LSC`, `Vw_CR_KQ_CSKH_DV`
 (mô hình Dim_Date × Dim_Org × Fact).
+
+## Xem trên điện thoại
+
+**Đừng xem bằng khung xem trước trong ứng dụng** (bấm thẳng vào file đính
+kèm trong Zalo/Messages/Claude — Quick Look của iPhone): trình xem trước
+này chặn JavaScript nên dashboard chỉ hiện khung trống với "Đang tải...".
+
+Cách đúng: **lưu file về máy rồi mở bằng Safari hoặc Chrome**
+(iPhone: tải về → app Tệp → giữ file → Chia sẻ → Safari;
+Android: tải về → mở bằng Chrome). Giao diện đã responsive cho màn hình
+điện thoại. Ổn định nhất là đưa file lên một địa chỉ web nội bộ và mở
+bằng link.
 
 ## Sửa giao diện / biểu đồ
 

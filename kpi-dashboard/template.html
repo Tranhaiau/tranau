@@ -164,6 +164,27 @@ body{font-family:'Segoe UI',sans-serif;background:#eff1f5;color:var(--text);font
 .cskh-c-lo{background:#ffebee;color:#b71c1c;font-weight:700;}
 .cskh-c-na{color:var(--text3);font-size:11px;}
 .cskh-tbl tr:hover td:not(.cskh-code):not(.metric-name){filter:brightness(.97);}
+
+/* ── Responsive mobile ── */
+@media(max-width:900px){
+  .kpi6sc{grid-template-columns:repeat(3,1fr);}
+  .q-grid,.g4,.kpi8-grid,.ctrl-g,.sol-wrap{grid-template-columns:repeat(2,1fr);}
+  .g2,.g3,.kpi3col{grid-template-columns:1fr;}
+  .hdr-right{text-align:left;}
+  /* chặn bảng rộng làm phình layout: ô grid được phép co + card tự cuộn ngang */
+  .g2>*,.g3>*,.g4>*,.kpi3col>*,.kpi8-grid>*,.q-grid>*,.kpi6sc>*,.kpi2sc>*,.ctrl-g>*,.sol-wrap>*{min-width:0;}
+  .card,.qc{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+}
+@media(max-width:560px){
+  .wrap{padding:10px 8px;}
+  .hdr{padding:10px 12px;}
+  .kpi6sc,.kpi2sc,.q-grid,.g4,.kpi8-grid{grid-template-columns:repeat(2,1fr);}
+  .ctrl-g,.sol-wrap{grid-template-columns:1fr;}
+  .kc-val{font-size:18px;}
+  .card,.qc{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fpanel{min-width:calc(50% - 8px);flex:1;}
+  .hint-ctrl{display:none;}
+}
 </style>
 </head>
 <body>
@@ -214,12 +235,12 @@ body{font-family:'Segoe UI',sans-serif;background:#eff1f5;color:var(--text);font
   <div class="hdr-right">
     <div>📊 Filter: <b id="hdrFilter">—</b></div>
     <div>📅 Kỳ: <b id="hdrPeriod">—</b></div>
-    <div>🗄️ Nguồn: CSV Export · <b>2026-06-23</b></div>
+    <div>🗄️ Nguồn: CSV Export · <b>__DATA_MAX_DATE__</b></div>
   </div>
 </div>
 
 <div class="wrap">
-<div class="alert-bar alert-info" id="mainAlert">⏳ Đang tải...</div>
+<div class="alert-bar alert-info" id="mainAlert">⏳ Đang tải... — nếu thông báo này không biến mất, trình xem file đang chặn JavaScript: hãy lưu file rồi mở bằng <b>Safari / Chrome</b> thay vì xem trước trong ứng dụng.</div>
 
 <!-- ① KPI SCORECARDS -->
 <div class="sec" id="sec1Title">① KPI — TH vs KH</div>
@@ -448,7 +469,7 @@ body{font-family:'Segoe UI',sans-serif;background:#eff1f5;color:var(--text);font
 <!-- 🎯 REVIEW CYCLE — Cuối trang, tham chiếu điều hành -->
 <div class="ctrl" style="margin-top:16px;">
   <h4>🎯 Review cycle — Quy trình kiểm soát KPI chi tiết</h4>
-  <div class="ctrl-g" style="grid-template-columns:repeat(4,1fr);">
+  <div class="ctrl-g">
     <div class="ci">
       <div class="ci-ico">📅</div>
       <div class="ci-t">Daily — 7:30 · 14:00 · 17:00</div>
@@ -513,7 +534,7 @@ const ALL_YEARS=[...new Set(DIM_DATE.map(d=>d.y))].sort((a,b)=>b-a);
 const BRANDS={};
 DIM_ORG.forEach(o=>{if(!BRANDS[o.brand])BRANDS[o.brand]=[];BRANDS[o.brand].push(o.code);});
 // Ngay cuoi cung co du lieu trong file -- patched by pgs_build_html.py
-const DATA_MAX_DATE=new Date('2026-06-23');
+const DATA_MAX_DATE=new Date('__DATA_MAX_DATE__');
 let SEL_YEARS=new Set(),SEL_MONTHS=new Set(),SEL_DEALERS=new Set(),M8_MONTHS=new Set();
 (function(){
     const y=ALL_YEARS[0], ms=DATE_MONTHS[y]||[], lm=ms.length?ms[ms.length-1]:5;

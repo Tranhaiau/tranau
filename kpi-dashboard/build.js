@@ -108,6 +108,20 @@ const now = new Date();
 const pad = (n) => String(n).padStart(2, '0');
 const generated = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
 
+// Ngày "dữ liệu đến hết" — dashboard dùng để nhận biết tháng chưa trọn kỳ
+// (tính "cần đạt/ngày còn lại"). Mặc định = ngày build; ghi đè khi build
+// dữ liệu cũ:  node build.js --asof 2026-06-23
+let dataMaxDate = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+const asofIdx = process.argv.indexOf('--asof');
+if (asofIdx !== -1) {
+  const v = process.argv[asofIdx + 1];
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(v ?? '')) {
+    console.error('✗ --asof cần định dạng YYYY-MM-DD, ví dụ: --asof 2026-06-23');
+    process.exit(1);
+  }
+  dataMaxDate = v;
+}
+
 const template = fs.readFileSync(TEMPLATE, 'utf8');
 if (!template.includes(PLACEHOLDER)) {
   console.error(`✗ template.html không chứa placeholder ${PLACEHOLDER}`);
@@ -128,6 +142,7 @@ function vendorScript(file) {
 
 const html = template
   .replace(PLACEHOLDER, () => payload)
+  .replaceAll('__DATA_MAX_DATE__', dataMaxDate)
   .replace('/*__VENDOR_CHARTJS__*/', () => vendorScript('chart.umd.js'))
   .replace('/*__VENDOR_DATALABELS__*/', () => vendorScript('chartjs-plugin-datalabels.min.js'));
 
@@ -136,4 +151,4 @@ const outFile = path.join(OUT_DIR, 'index.html');
 fs.writeFileSync(outFile, html);
 
 console.log(`✓ Đã build ${path.relative(ROOT, outFile)} (${(html.length / 1024).toFixed(0)} KB)`);
-console.log(`  fact: ${fact.length} dòng · dim_date: ${dim_date.length} · dim_org: ${dim_org.length} · generated: ${generated}`);
+console.log(`  fact: ${fact.length} dòng · dim_date: ${dim_date.length} · dim_org: ${dim_org.length} · dữ liệu đến: ${dataMaxDate}`);
