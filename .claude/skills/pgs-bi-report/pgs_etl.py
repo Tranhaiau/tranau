@@ -9,11 +9,8 @@ import numpy as np
 
 warnings.filterwarnings('ignore')
 
-ROOT = r"D:\TCT PGS\Claude Data"
-if not os.path.isdir(ROOT):
-    # Linux mount path (when run inside Cowork shell)
-    ROOT = "/sessions/amazing-happy-euler/mnt/Claude Data"
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "output")
+ROOT = os.environ.get("PGS_DATA_ROOT", r"D:\TCT PGS\Claude Data")
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
 OUT = os.path.normpath(OUT)
 os.makedirs(OUT, exist_ok=True)
 

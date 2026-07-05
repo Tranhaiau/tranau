@@ -146,7 +146,7 @@ Layer này quyết định **khi nào chuyển skill** thay vì cố gắng tự
 |---|---|---|
 | TVBH có tỷ lệ chốt thấp + pipeline yếu | `pgs-training-management` | Mã NS + KPI cá nhân + module nghi vấn |
 | Doanh số sụt nghi do hậu mãi kém | `pgs-service-analytics` | Danh sách VIN + CSI gần nhất |
-| Cần báo cáo tổng hợp toàn đại lý | `automotive-dealer-analytics` | Tóm tắt 5 phần báo cáo |
+| Cần báo cáo tổng hợp toàn đại lý | `pgs-bi-report` | Tóm tắt 5 phần báo cáo |
 | Tài liệu bán hàng cần biên soạn | `pgs-training-management` (Sub-Agent A) | File nguồn + level + TH |
 
 > **Tương ứng với "Layer 5 – Plugins: skills/ + agents/ + hooks/ + commands/ →

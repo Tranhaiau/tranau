@@ -16,7 +16,7 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 
-CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'output', '_cache')
+CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', '_cache')
 os.makedirs(CACHE, exist_ok=True)
 
 def cache_path(name):

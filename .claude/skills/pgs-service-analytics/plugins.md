@@ -107,11 +107,11 @@ context_bo_sung:
 
 ---
 
-### 1.4 → `automotive-dealer-analytics` (báo cáo tổng hợp)
+### 1.4 → `pgs-bi-report` (báo cáo tổng hợp)
 
 ```yaml
 from: "pgs-service-analytics"
-to: "automotive-dealer-analytics"
+to: "pgs-bi-report"
 intent: "consolidate_for_dealer_report"
 contribution:
   uio: 12480

@@ -153,7 +153,7 @@ Sau **mỗi báo cáo** ghi lại baseline: ngày X có UIO=…, %quay lại=…
 | KTV hiệu suất thấp + FTF kém | `pgs-training-management` | Mã KTV + KPI cá nhân + module nghi vấn |
 | CSI thấp ở "tư vấn" → CVDV yếu | `pgs-training-management` | Mã CVDV + điểm chạm yếu |
 | UIO cao nhưng quay lại thấp → cơ hội bán xe mới | `pgs-sales-analytics` | Phân khúc VIN + chiến dịch upsell |
-| Cần báo cáo tổng hợp toàn đại lý | `automotive-dealer-analytics` | Tóm tắt 5 phần báo cáo |
+| Cần báo cáo tổng hợp toàn đại lý | `pgs-bi-report` | Tóm tắt 5 phần báo cáo |
 
 > **Tương ứng "Layer 5 – Plugins: skills/ + agents/ + hooks/ + commands/ →
 > Think npm packages for agent capabilities."**

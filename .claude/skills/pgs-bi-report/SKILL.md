@@ -25,8 +25,10 @@ ls "D:\TCT PGS\Claude Data\MA DANH MUC\"  # MA DON VI - 2026.xlsx,...
 Nếu thiếu folder/file nào trong nguồn cũ → **bỏ qua** theo yêu cầu (ETL đã có guard).
 
 ### Bước 2 — Chạy ETL
+Script `pgs_etl.py` / `run_etl_stages.py` nằm ngay trong thư mục skill này
+(`.claude/skills/pgs-bi-report/`). Chạy trực tiếp từ đó:
 ```bash
-cd D:\TCT PGS\Claude Data\BAO CAO BI\etl
+cd .claude/skills/pgs-bi-report
 python pgs_etl.py
 # hoặc chạy theo stage:
 python run_etl_stages.py A   # dims + small facts
@@ -34,15 +36,26 @@ python run_etl_stages.py B   # BK LSC (Service RO – nặng)
 python run_etl_stages.py C   # measures + export JSON
 ```
 
-Có thể set biến môi trường `PGS_BK_YEARS=2023,2024,2025` (mặc định chỉ 2025).
+Mặc định `ROOT` trỏ vào `D:\TCT PGS\Claude Data` (máy Windows của user). Nếu chạy
+trong môi trường khác (vd. Claude Code cloud, không có ổ `D:\`), set biến môi
+trường `PGS_DATA_ROOT` trỏ tới nơi thực sự chứa dữ liệu, ví dụ:
+```bash
+export PGS_DATA_ROOT="/path/to/Claude Data"
+python pgs_etl.py
+```
+Có thể set thêm `PGS_BK_YEARS=2023,2024,2025` (mặc định chỉ 2025).
 
-Đầu ra:
+Đầu ra (ghi vào `output/` — cùng cấp với `pgs_etl.py`):
 - `output/_cache/*.pkl` — cache trung gian
 - `output/pgs_data.json` — đầy đủ (53 MB)
 - `output/pgs_data_slim.json` — bản gọn cho HTML (1.7 MB)
 
 ### Bước 3 — Mở dashboard
-Mở file `output/dashboard.html` bằng browser (Chrome/Edge). HTML đọc `pgs_data_slim.json` ở cùng thư mục.
+`dashboard.html` đọc `pgs_data_slim.json` ở **cùng thư mục** với nó. Copy (hoặc symlink)
+`output/pgs_data_slim.json` ra cùng chỗ với `dashboard.html`, rồi mở `dashboard.html` bằng browser (Chrome/Edge):
+```bash
+cp output/pgs_data_slim.json .
+```
 
 ### Bước 4 — Tương tác
 - Chọn Đại lý / Thương hiệu / Tỉnh / Năm / Tháng → bấm **Áp dụng**.
@@ -154,7 +167,7 @@ Bộ lọc dùng chung cho cả 5 tabs.
 
 ## 9. Liên kết
 
-- File ETL: `etl/pgs_etl.py`, `etl/run_etl_stages.py`
+- File ETL: `pgs_etl.py`, `run_etl_stages.py` (cùng thư mục skill)
 - Cache: `output/_cache/*.pkl`
-- Dashboard: `output/dashboard.html`
+- Dashboard: `dashboard.html` (bundled sẵn trong skill) — copy hoặc symlink `output/pgs_data_slim.json` ra cùng thư mục với `dashboard.html` trước khi mở, hoặc mở thẳng `output/dashboard.html` nếu đã copy `dashboard.html` vào đó
 - Data: `output/pgs_data_slim.json` (gọn) / `output/pgs_data.json` (đầy đủ)

@@ -162,11 +162,11 @@ return_format: "yaml + verdict"
 
 ---
 
-### 2.3 → `automotive-dealer-analytics` (báo cáo tổng hợp)
+### 2.3 → `pgs-bi-report` (báo cáo tổng hợp)
 
 ```yaml
 from: "pgs-training-management"
-to: "automotive-dealer-analytics"
+to: "pgs-bi-report"
 intent: "consolidate_for_dealer_report"
 contribution:
   ky: "T4-T5/2026"

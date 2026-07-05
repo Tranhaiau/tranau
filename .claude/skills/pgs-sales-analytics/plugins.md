@@ -77,7 +77,7 @@ return_format: "yaml summary, không cần báo cáo .docx"
 
 ---
 
-### 1.3 → `automotive-dealer-analytics`
+### 1.3 → `pgs-bi-report`
 
 **Khi nào:**
 - Cần báo cáo tổng hợp toàn đại lý (sales + service + training) cho Dealer Principal.
@@ -86,7 +86,7 @@ return_format: "yaml summary, không cần báo cáo .docx"
 
 ```yaml
 from: "pgs-sales-analytics"
-to: "automotive-dealer-analytics"
+to: "pgs-bi-report"
 intent: "consolidate_for_dealer_report"
 contribution:                           # phần do sales đóng góp vào báo cáo tổng
   thi_phan_TH: {Toyota: 19.2, Hyundai: 11.8}

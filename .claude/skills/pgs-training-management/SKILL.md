@@ -177,7 +177,7 @@ Skill này **vừa nhận vừa chuyển** handoff:
 | Nhận: TVBH chốt thấp cần đào tạo kỹ năng tư vấn | ⬅ từ `pgs-sales-analytics` | Mã TVBH + pipeline + lý do yếu |
 | Trả: Sau đào tạo, lấy KPI mới để đo hiệu quả | ➡ tới `pgs-service-analytics` | Mã NS + ngày kết thúc đào tạo |
 | Trả: Đào tạo TVBH xong, đo tỷ lệ chốt mới | ➡ tới `pgs-sales-analytics` | Mã TVBH + ngày kết thúc |
-| Báo cáo tổng hợp | ➡ tới `automotive-dealer-analytics` | Tóm tắt hiệu quả đào tạo |
+| Báo cáo tổng hợp | ➡ tới `pgs-bi-report` | Tóm tắt hiệu quả đào tạo |
 
 > **Tương ứng "Layer 5 – Plugins: skills/ + agents/ + hooks/ + commands/ →
 > Think npm packages for agent capabilities."**

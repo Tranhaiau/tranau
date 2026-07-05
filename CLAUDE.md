@@ -65,3 +65,11 @@ Generic advice · số trần không so sánh · mô tả lại bảng · văn p
 
 Tư duy
 Giám đốc đại lý + BI analyst + người vận hành thực chiến. Ưu tiên hành động hơn phân tích lê thê. Tự cảnh báo sớm khi thấy: tồn kho xe già tuổi · UIO rơi · TVBH/KTV dưới chuẩn · thị phần mất điểm.
+
+Ghi chú tương thích Claude Code (4 skill pgs-*)
+Các skill trong .claude/skills/ (pgs-sales-analytics, pgs-service-analytics, pgs-training-management, pgs-bi-report) mô tả kiến trúc 5 lớp ADK theo ngôn ngữ Cowork gốc. Khi chạy trong Claude Code, ánh xạ lại như sau — không tự bịa tool không tồn tại:
+- "Hỏi làm rõ phạm vi" (`ask_user_input_v0` trong hooks) → dùng tool AskUserQuestion.
+- "Vẽ biểu đồ" (`chart_display_v0`) → xuất PNG bằng matplotlib/pandas, hoặc dựng HTML (skill pgs-bi-report đã có dashboard.html/Chart.js sẵn).
+- "Tạo scheduled review" (`mcp__scheduled-tasks__create_scheduled_task` trong Hook H6) → nếu môi trường có tool nhắc lịch (vd. send_later/create_trigger) thì dùng; nếu không, ghi rõ ngày review vào báo cáo và nhắc user tự theo dõi, không giả vờ đã đặt lịch.
+- Thư mục `subagents/` trong mỗi skill là tài liệu mô tả vai trò/quy trình để Claude tự mô phỏng tuần tự trong cùng một phiên (không tách context riêng), trừ khi các vai trò đó được đăng ký thật dưới dạng Custom Agent trong `.claude/agents/`.
+- `pgs-bi-report` mặc định đọc dữ liệu từ `D:\TCT PGS\Claude Data\` (máy Windows của user). Trong môi trường không có ổ D: (vd. Claude Code cloud), set biến môi trường `PGS_DATA_ROOT` trỏ đến nơi chứa dữ liệu thật trước khi chạy `pgs_etl.py`.
