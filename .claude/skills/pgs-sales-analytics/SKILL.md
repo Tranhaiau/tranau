@@ -107,6 +107,10 @@ Giống Git hooks: `PreToolUse` / `PostToolUse` / `Stop`.
 
 ## LAYER 4 — SUBAGENTS (delegation — main context giữ sạch)
 
+> **Đăng ký thật trong Claude Code:** `market-analyzer`, `funnel-diagnoser`, `plan-builder`
+> là Custom Agent thật, định nghĩa tại `.claude/agents/<tên>.md` — gọi qua Agent tool với
+> `subagent_type` đúng tên đó (file trong `subagents/` của skill này chỉ là spec chi tiết tham chiếu).
+
 Khi câu hỏi phức tạp, **delegate sang sub-agent có context riêng** thay vì dồn hết vào main.
 Sub-agents trả về kết quả gọn → main tổng hợp.
 

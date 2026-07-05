@@ -113,6 +113,11 @@ training/
 
 ## LAYER 4 — SUBAGENTS ★ (trọng tâm của skill này)
 
+> **Đăng ký thật trong Claude Code:** A/B/C/D dưới đây chỉ là nhãn gọi tắt trong tài liệu.
+> Khi cần delegate, gọi qua Agent tool với `subagent_type` tương ứng:
+> A → `training-composer` · B → `training-test-builder` · C → `training-evaluator` · D → `training-reviewer`
+> (định nghĩa đầy đủ tại `.claude/agents/<tên>.md`, không phải file trong `subagents/` của skill này).
+
 ```
             Main Agent (training-management)
             │ delegate only ↓             ↑ results only

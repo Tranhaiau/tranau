@@ -115,6 +115,10 @@ Sau **mỗi báo cáo** ghi lại baseline: ngày X có UIO=…, %quay lại=…
 
 ## LAYER 4 — SUBAGENTS (delegation)
 
+> **Đăng ký thật trong Claude Code:** `uio-explorer`, `ro-analyzer`, `csi-diagnoser`, `vin-recaller`
+> là Custom Agent thật, định nghĩa tại `.claude/agents/<tên>.md` — gọi qua Agent tool với
+> `subagent_type` đúng tên đó (file trong `subagents/` của skill này chỉ là spec chi tiết tham chiếu).
+
 ```
             Main Agent (service-analytics)
             │ delegate only ↓        ↑ results only
